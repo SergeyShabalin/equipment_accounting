@@ -2,10 +2,12 @@ import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import {Navbar} from "./components/Navbar";
-import {Home} from "./pages/home";
-import {About} from "./pages/About";
-import {Profile} from "./pages/Profile";
 
+import {Archive} from "./pages/archive";
+import {Department} from "./pages/department";
+import {Devices} from "./pages/devices";
+import {Registered} from "./pages/registered";
+import {Worker} from "./pages/worker";
 
 
 function App() {
@@ -14,11 +16,13 @@ function App() {
                 <BrowserRouter>
                     <Navbar/>
                     <div className="container pt-0">
-                   
+
                         <Switch>
-                            <Route path="/" exact component={Home}/>
-                            <Route path="/about" component={About}/>
-                            <Route path="/profile/:name" component={Profile}/>
+                            <Route path="/archive" component={Archive}/>
+                            <Route path="/department" component={Department}/>
+                            <Route path="/devices" component={Devices}/>
+                            <Route path="/registered" component={Registered}/>
+                            <Route path="/worker" component={Worker}/>
                         </Switch>
                     </div>
                 </BrowserRouter>

@@ -9,7 +9,7 @@ export const Home = () => {
         <Fragment>
 
 
-            <div className="row">
+            <div className="devices">
 
                 <h1>home</h1>
 
