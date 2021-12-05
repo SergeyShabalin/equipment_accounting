@@ -1,0 +1,15 @@
+$modalHeight :300px;
+$modalWidth :600px;
+
+.modalWindow{
+border: 2px solid black;
+    background: aqua;
+    position: absolute;
+    right: calc(50% - 600px/2);
+    width:600px;
+    top: calc(50% - 300px/2);
+    height: 300px;
+
+}
+
+

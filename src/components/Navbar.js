@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 export const Navbar = () => (
 
     <nav className="navbar navbar-dark  bg-primary   navbar-expand-lg">
-        <div className="navbar-brand" >
+        <div className="navbar-brand p-3" >
             Учёт оборудования
         </div>
         <ul className="navbar-nav">
