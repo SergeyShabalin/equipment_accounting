@@ -1,9 +1,11 @@
 import React from 'react'
 import '../styles/modalWindow.scss'
+import '../components/modalWindow'
 
 
 const Departments = () => {
-    const [numbers, setNumbers] = React.useState(
+    //главный стейт отдела
+    const [depart, setDepart] = React.useState(
         [{
             id: 1,
             name: 'отдел информационного обеспечения',
@@ -11,7 +13,8 @@ const Departments = () => {
             bossName: 'Василий',
             bossSurName: 'Ковалёв',
             bossMiddleName: 'Вячеславович',
-            cabinetNumber: '412'
+            cabinetNumber: '412',
+
         },
             {
                 id: 2,
@@ -20,39 +23,69 @@ const Departments = () => {
                 bossName: 'Кузнецов',
                 bossSurName: 'Андрей',
                 bossMiddleName: 'Иванович',
-                cabinetNumber: '212'
+                cabinetNumber: '212',
+
             }
         ]
     )
+    //стэйт модалки
     const [hidden, setHidden] = React.useState(true)
+
+    //стэйт инпутов
+    const [inputs, setInputs] = React.useState(
+        [{
+            name: '',
+            level: '',
+            bossName: '',
+            bossSurName: '',
+            bossMiddleName: '',
+            cabinetNumber: '',
+        }]
+    )
 
 
     const a = {
-        id: numbers.length + 1,
-        name: 'отдеjhg',
+        id: depart.length + 1,
+        name: 'fgsg',
         level: '6',
         bossName: 'jhf',
         bossSurName: 'Ковалёв',
         bossMiddleName: 'Вячеславович',
         cabinetNumber: '412'
     }
-    const addModal = () => {
-        setHidden(true)
-        setNumbers([...numbers, a])
-    }
 
+    //закрыть модалку
     const closeModal = () => {
         setHidden(true)
-       
+
     }
 
+    //открыть модалку
     const openModal = () => {
         setHidden(false)
     }
 
+    //добавить новый отдел
+    const addModal = (event) => {
+       // setHidden(true)
 
-    let res = numbers.map(function (item) {
+        console.log(event.target.value)
+     inputs = event.target.value
+       setInputs([...inputs.name,s])
+        console.log(inputs)
+    }
+
+
+    const inputHandler = (event) => {
+
+        //
+
+    }
+
+
+    let res = depart.map(function (item) {
         return (
+            //тело таблицы
             <tr key={item.id}>
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
@@ -62,11 +95,12 @@ const Departments = () => {
             </tr>)
     })
 
+    //Заголовок таблицы
     return <div>
         <p>
             Отделы
             <table className="table-bordered ">
-                <thead align= 'center'   className="table-secondary">
+                <thead align='center' className="table-secondary">
                 <tr>
                     <th scope="col">№</th>
                     <th scope="col">Отдел</th>
@@ -80,13 +114,18 @@ const Departments = () => {
             </table>
             <button hidden={!hidden} className="btn btn-success" onClick={openModal}>Добавить новый отдел</button>
         </p>
-
+            {/*Модалка*/}
         <div hidden={hidden} className='modalWindow'>
+            {/*инпуты */}
             <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
                     <span className="input-group-text" id="inputGroup-sizing-sm">Отдел</span>
                 </div>
-                <input type="text" className="form-control" aria-label="Sizing example input"
+                <input type="text"
+                       value={inputs.name}
+                       onChange={addModal}
+                       className="form-control"
+                       aria-label="Sizing example input"
                        aria-describedby="inputGroup-sizing-sm"/>
             </div>
 
@@ -114,9 +153,9 @@ const Departments = () => {
                        aria-describedby="inputGroup-sizing-sm"/>
             </div>
 
+
             <button onClick={addModal}>Добавить</button>
             <button onClick={closeModal}>Отменить</button>
-
         </div>
     </div>
 
