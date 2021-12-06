@@ -27,49 +27,52 @@ const Departments = () => {
     const [hidden, setHidden] = React.useState(true)
 
 
-const a ={
-    id: numbers.length +1,
-    name: 'отдеjhg',
-    level: '6',
-    bossName: 'jhf',
-    bossSurName: 'Ковалёв',
-    bossMiddleName: 'Вячеславович',
-    cabinetNumber: '412'
-}
-    const closeModal =()=>{
+    const a = {
+        id: numbers.length + 1,
+        name: 'отдеjhg',
+        level: '6',
+        bossName: 'jhf',
+        bossSurName: 'Ковалёв',
+        bossMiddleName: 'Вячеславович',
+        cabinetNumber: '412'
+    }
+    const addModal = () => {
         setHidden(true)
         setNumbers([...numbers, a])
-            }
+    }
 
-    const openModal =()=>{
+    const closeModal = () => {
+        setHidden(true)
+       
+    }
+
+    const openModal = () => {
         setHidden(false)
     }
 
 
-
-
-    let res = numbers.map(function(item) {
+    let res = numbers.map(function (item) {
         return (
             <tr key={item.id}>
-                    <th scope="row">{item.id}</th>
-                    <td>{item.name}</td>
-                    <td>{item.level}</td>
-                    <td>{item.bossName} {item.bossSurName} {item.bossMiddleName}</td>
-                    <td>{item.cabinetNumber}</td>
-                </tr>)
+                <th scope="row">{item.id}</th>
+                <td>{item.name}</td>
+                <td>{item.level}</td>
+                <td>{item.bossName} {item.bossSurName} {item.bossMiddleName}</td>
+                <td>{item.cabinetNumber}</td>
+            </tr>)
     })
 
     return <div>
         <p>
             Отделы
             <table className="table-bordered ">
-                <thead className="table-secondary">
+                <thead align= 'center'   className="table-secondary">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">name</th>
-                    <th scope="col">level</th>
-                    <th scope="col">boss</th>
-                    <th scope="col">cabinet</th>
+                    <th scope="col">№</th>
+                    <th scope="col">Отдел</th>
+                    <th scope="col">Этаж</th>
+                    <th scope="col">Начальник</th>
+                    <th scope="col">Кабинет</th>
                 </tr>
                 </thead>
                 {res}
@@ -77,18 +80,44 @@ const a ={
             </table>
             <button hidden={!hidden} className="btn btn-success" onClick={openModal}>Добавить новый отдел</button>
         </p>
-            <div hidden={hidden} className='modalWindow'>
-                <div className="input-group input-group-sm mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroup-sizing-sm">Отдел</span>
-                    </div>
-                    <input type="text" className="form-control" aria-label="Sizing example input"
-                           aria-describedby="inputGroup-sizing-sm"/>
+
+        <div hidden={hidden} className='modalWindow'>
+            <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroup-sizing-sm">Отдел</span>
                 </div>
-                <button onClick={closeModal}>Добавить</button>
-                <button onClick={closeModal}>Отменить</button>
-                модалка
+                <input type="text" className="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-sm"/>
             </div>
+
+            <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroup-sizing-sm">Этаж</span>
+                </div>
+                <input type="text" className="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-sm"/>
+            </div>
+
+            <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroup-sizing-sm">Начальник</span>
+                </div>
+                <input type="text" className="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-sm"/>
+            </div>
+
+            <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroup-sizing-sm">Кабинет</span>
+                </div>
+                <input type="text" className="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-sm"/>
+            </div>
+
+            <button onClick={addModal}>Добавить</button>
+            <button onClick={closeModal}>Отменить</button>
+
+        </div>
     </div>
 
 
