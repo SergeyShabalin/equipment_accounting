@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/modalWindow.scss'
 import '../components/modalWindow'
+import Modal from "../components/modal"
 
 
 const Departments = () => {
@@ -28,31 +29,13 @@ const Departments = () => {
             }
         ]
     )
+
+
     //стэйт модалки
     const [hidden, setHidden] = React.useState(true)
 
     //стэйт инпутов
-    const [inputs, setInputs] = React.useState(
-        [{
-            name: '',
-            level: '',
-            bossName: '',
-            bossSurName: '',
-            bossMiddleName: '',
-            cabinetNumber: '',
-        }]
-    )
 
-
-    const a = {
-        id: depart.length + 1,
-        name: 'fgsg',
-        level: '6',
-        bossName: 'jhf',
-        bossSurName: 'Ковалёв',
-        bossMiddleName: 'Вячеславович',
-        cabinetNumber: '412'
-    }
 
     //закрыть модалку
     const closeModal = () => {
@@ -66,21 +49,15 @@ const Departments = () => {
     }
 
     //добавить новый отдел
-    const addModal = (event) => {
-       // setHidden(true)
+    const addModal = (inputs) => {
+        const obj = {...inputs, id: depart.length + 2}
 
-        console.log(event.target.value)
-     inputs = event.target.value
-       setInputs([...inputs.name,s])
-        console.log(inputs)
-    }
-
-
-    const inputHandler = (event) => {
-
-        //
+        setHidden(true)
+        setDepart([...depart, obj])
 
     }
+
+    console.log(depart)
 
 
     let res = depart.map(function (item) {
@@ -97,7 +74,7 @@ const Departments = () => {
 
     //Заголовок таблицы
     return <div>
-        <p>
+
             Отделы
             <table className="table-bordered ">
                 <thead align='center' className="table-secondary">
@@ -113,50 +90,13 @@ const Departments = () => {
 
             </table>
             <button hidden={!hidden} className="btn btn-success" onClick={openModal}>Добавить новый отдел</button>
-        </p>
-            {/*Модалка*/}
-        <div hidden={hidden} className='modalWindow'>
-            {/*инпуты */}
-            <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroup-sizing-sm">Отдел</span>
-                </div>
-                <input type="text"
-                       value={inputs.name}
-                       onChange={addModal}
-                       className="form-control"
-                       aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm"/>
-            </div>
 
-            <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroup-sizing-sm">Этаж</span>
-                </div>
-                <input type="text" className="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm"/>
-            </div>
+        <Modal
+            hidden={hidden}
+            addModal={addModal}
+            closeModal={closeModal}
 
-            <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroup-sizing-sm">Начальник</span>
-                </div>
-                <input type="text" className="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm"/>
-            </div>
-
-            <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroup-sizing-sm">Кабинет</span>
-                </div>
-                <input type="text" className="form-control" aria-label="Sizing example input"
-                       aria-describedby="inputGroup-sizing-sm"/>
-            </div>
-
-
-            <button onClick={addModal}>Добавить</button>
-            <button onClick={closeModal}>Отменить</button>
-        </div>
+        />
     </div>
 
 
