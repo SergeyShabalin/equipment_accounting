@@ -40,7 +40,6 @@ const Departments = () => {
     //закрыть модалку
     const closeModal = () => {
         setHidden(true)
-
     }
 
     //открыть модалку
@@ -50,24 +49,21 @@ const Departments = () => {
 
     //добавить новый отдел
     const addModal = (inputs) => {
-        const obj = {...inputs, id: depart.length + 2}
+        const idNumber = {...inputs, id: depart.length + 2}
 
         setHidden(true)
-        setDepart([...depart, obj])
+        setDepart([...depart, idNumber])
 
     }
 
-    console.log(depart)
-
-
-    let res = depart.map(function (item) {
+     let res = depart.map(function (item) {
         return (
             //тело таблицы
             <tr key={item.id}>
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
                 <td>{item.level}</td>
-                <td>{item.bossName} {item.bossSurName} {item.bossMiddleName}</td>
+                <td>{item.bossSurName} {item.bossName} {item.bossMiddleName}</td>
                 <td>{item.cabinetNumber}</td>
             </tr>)
     })
@@ -75,21 +71,24 @@ const Departments = () => {
     //Заголовок таблицы
     return <div>
 
-            Отделы
-            <table className="table-bordered ">
-                <thead align='center' className="table-secondary">
-                <tr>
-                    <th scope="col">№</th>
-                    <th scope="col">Отдел</th>
-                    <th scope="col">Этаж</th>
-                    <th scope="col">Начальник</th>
-                    <th scope="col">Кабинет</th>
-                </tr>
-                </thead>
-                {res}
+        Отделы
+        <table className="table table-hover">
+            <thead align='center' className="table-primary">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Отдел</th>
+                <th scope="col">Этаж</th>
+                <th scope="col">Начальник</th>
+                <th scope="col">Кабинет</th>
+            </tr>
 
-            </table>
-            <button hidden={!hidden} className="btn btn-success" onClick={openModal}>Добавить новый отдел</button>
+            {/*Содержимое таблицы*/}
+            </thead>
+            <tbody >
+            {res}
+            </tbody>
+        </table>
+        <button hidden={!hidden} className="btn btn-success" onClick={openModal}>Добавить новый отдел</button>
 
         <Modal
             hidden={hidden}

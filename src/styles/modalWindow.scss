@@ -1,15 +1,37 @@
-$modalHeight :300px;
-$modalWidth :600px;
 
 .modalWindow{
-border: 2px solid black;
-    background: aqua;
+border: 1px solid rgba(104, 99, 99, 0.85);
+    background: rgba(8, 210, 210, 0.88);
     position: absolute;
     right: calc(50% - 600px/2);
     width:600px;
-    top: calc(50% - 300px/2);
-    height: 300px;
+    top: calc(50% - 560px/2);
+    height: 560px;
+    padding: 20px;
 
 }
 
+.modalButton{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.modalTitle{
+    display: flex;
+    justify-content: center;
+}
+
+
+.modalOpacity{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+
+
+
+}
 
