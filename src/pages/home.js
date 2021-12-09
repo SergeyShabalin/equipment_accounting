@@ -13,14 +13,6 @@ export const Home = () => {
 
                 <h1>home</h1>
 
-                {/*{loading*/}
-                {/*    ? <p className="text-center">Загрузка...</p>*/}
-                {/*    : users.map(user => (*/}
-                {/*        <div className="col-sm-4 mb-4" key={user.id}>*/}
-
-                {/*        </div>*/}
-                {/*    ))*/}
-                {/*}*/}
 
             </div>
 

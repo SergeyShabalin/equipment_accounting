@@ -2,7 +2,7 @@ import React from 'react';
 import {Input} from "./input";
 
 
-export default function Modal({hidden, addModal, closeModal}) {
+export default function Modal({hidden,addModal,closeModal, className}) {
     const initState = {
         name: '',
         level: '',
@@ -13,21 +13,27 @@ export default function Modal({hidden, addModal, closeModal}) {
     }
     const [inputs, setInputs] = React.useState(initState)
 
-
+//занести в стейт значения из инпутов
     const inputHandler = ({target}) => {
         setInputs({
             ...inputs, [target.name]: target.value,
         })
     }
-
+    //функционал кнопки отменить
     const cancelModal = () => {
         closeModal()
         setInputs(initState)
     }
 
+    //функционал кнопки добавить
     const addClearModal = () => {
         addModal(inputs)
         setInputs(initState)
+    }
+
+    //функционал кнопки сохранить
+    const  addSaveModal = ()=>{
+
     }
 
     return (
@@ -35,11 +41,13 @@ export default function Modal({hidden, addModal, closeModal}) {
             {/*Модалка*/}
             <div onClick={closeModal}
                  hidden={hidden}
-                 className='modalOpacity'>
+                 className='modalOpacity'
+            >
             </div>
 
-            <div hidden={hidden} className='modalWindow'>
-                <h2 className='modalTitle'>Добавление отдела</h2>
+            <div hidden={hidden}
+                 className={className.name}>
+                <h2 className='modalTitle'>{className.title}</h2>
                 {/*инпуты */}
                 <h3>Отдел</h3>
                 <Input type="text"
@@ -86,15 +94,31 @@ export default function Modal({hidden, addModal, closeModal}) {
                 />
 
                 <div className='modalButton'>
-                    <button
-                        onClick={
-                            addClearModal
-                        }>Добавить
+                    <button type="button"
+                            className="btn btn-danger"
+                            onClick={cancelModal}
+                    >Отменить
                     </button>
 
                     <button
-                        onClick={cancelModal}
-                    >Отменить
+
+                            type="button"
+                            className={className.btnAddHidden}
+                            /*"btn btn-success visible"*/
+                            onClick={
+                                addClearModal
+                            }
+                    >Добавить
+                    </button>
+
+                    <button
+                            type="button"
+                            className=  {className.btnSaveHidden}
+                        /*"btn btn-secondary "*/
+                            onClick={
+                                addSaveModal
+                            }
+                    >Сохранить
                     </button>
                 </div>
             </div>

@@ -19,10 +19,10 @@ const Departments = () => {
         },
             {
                 id: 2,
-                name: 'отдел хозяйственного обеспечеия',
+                name: 'отдел хозяйственного обеспечения',
                 level: '3',
-                bossName: 'Кузнецов',
-                bossSurName: 'Андрей',
+                bossName: 'Андрей',
+                bossSurName: 'Кузнецов',
                 bossMiddleName: 'Иванович',
                 cabinetNumber: '212',
 
@@ -34,18 +34,41 @@ const Departments = () => {
     //стэйт модалки
     const [hidden, setHidden] = React.useState(true)
 
-    //стэйт инпутов
-
+    //стэйт класснейм
+    const [className, setClassName] = React.useState({
+        name: 'modalWindow',
+        title: 'Добавление отдела',
+        btnAddHidden: 'visible',
+        btnSaveHidden: 'visible'
+    })
 
     //закрыть модалку
     const closeModal = () => {
         setHidden(true)
     }
 
-    //открыть модалку
-    const openModal = () => {
+    //открыть модалку добавления
+    const openModalAdd = () => {
         setHidden(false)
+        setClassName({
+            name: 'modalWindow',
+            title: 'Добавление отдела',
+            btnAddHidden: 'visible',
+            btnSaveHidden: 'hiddenButton'
+        })
     }
+    //открыть модалку изменения
+    const openModalChange = () => {
+        setHidden(false)
+        setClassName({
+            name: 'modalWindowChange',
+            title: 'Изменить данные',
+            btnAddHidden: 'hiddenButton',
+            btnSaveHidden: 'visible'
+        })
+
+    }
+
 
     //добавить новый отдел
     const addModal = (inputs) => {
@@ -56,7 +79,7 @@ const Departments = () => {
 
     }
 
-     let res = depart.map(function (item) {
+    let res = depart.map(function (item) {
         return (
             //тело таблицы
             <tr key={item.id}>
@@ -73,7 +96,8 @@ const Departments = () => {
 
         Отделы
         <table className="table table-hover">
-            <thead align='center' className="table-primary">
+            <thead
+                align='center' className="table-primary">
             <tr>
                 <th scope="col">№</th>
                 <th scope="col">Отдел</th>
@@ -84,17 +108,19 @@ const Departments = () => {
 
             {/*Содержимое таблицы*/}
             </thead>
-            <tbody >
+            <tbody>
             {res}
             </tbody>
         </table>
-        <button hidden={!hidden} className="btn btn-success" onClick={openModal}>Добавить новый отдел</button>
-
+        <div>
+            <button hidden={!hidden} className="btn btn-success" onClick={openModalAdd}>Добавить новый отдел</button>
+            <button hidden={!hidden} type="button" className="btn btn-info" onClick={openModalChange}>Изменить</button>
+        </div>
         <Modal
             hidden={hidden}
             addModal={addModal}
             closeModal={closeModal}
-
+            className={className}
         />
     </div>
 
