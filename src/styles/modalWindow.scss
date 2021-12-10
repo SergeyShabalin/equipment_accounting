@@ -28,11 +28,12 @@
 }
 
 .hiddenButton {
-  visibility: hidden;
+  display: none
 }
 
 .visibleButton {
-  visibility: visible;
+  display: block
+
 }
 
 .modalTitle {

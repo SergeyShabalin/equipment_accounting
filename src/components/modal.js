@@ -2,7 +2,7 @@ import React from 'react';
 import {Input} from "./input";
 
 
-export default function Modal({hidden,addModal,closeModal, className}) {
+export default function Modal({hidden, addModal, closeModal, className, saveModal}) {
     const initState = {
         name: '',
         level: '',
@@ -12,6 +12,14 @@ export default function Modal({hidden,addModal,closeModal, className}) {
         cabinetNumber: '',
     }
     const [inputs, setInputs] = React.useState(initState)
+
+    React.useEffect(() => {
+        if (className.isEdit === true){
+            setInputs(className.item)
+        }
+    }, [className.item])
+
+
 
 //занести в стейт значения из инпутов
     const inputHandler = ({target}) => {
@@ -31,22 +39,26 @@ export default function Modal({hidden,addModal,closeModal, className}) {
         setInputs(initState)
     }
 
-    //функционал кнопки сохранить
-    const  addSaveModal = ()=>{
 
+    const saveInputsModal = () => {
+        saveModal(inputs)
     }
+
+
 
     return (
         <div>
             {/*Модалка*/}
-            <div onClick={closeModal}
+            <div
                  hidden={hidden}
+                 onClick={cancelModal}
                  className='modalOpacity'
             >
             </div>
 
             <div hidden={hidden}
-                 className={className.name}>
+                 className={className.name}
+            >
                 <h2 className='modalTitle'>{className.title}</h2>
                 {/*инпуты */}
                 <h3>Отдел</h3>
@@ -101,25 +113,23 @@ export default function Modal({hidden,addModal,closeModal, className}) {
                     </button>
 
                     <button
-
-                            type="button"
-                            className={className.btnAddHidden}
-                            /*"btn btn-success visible"*/
-                            onClick={
-                                addClearModal
-                            }
+                        type="button"
+                        className={className.btnAddHidden + ' btn btn-success'}
+                        onClick={
+                            addClearModal
+                        }
                     >Добавить
                     </button>
 
                     <button
-                            type="button"
-                            className=  {className.btnSaveHidden}
-                        /*"btn btn-secondary "*/
-                            onClick={
-                                addSaveModal
-                            }
+                        type="button"
+                        className={className.btnSaveHidden + ' btn btn-secondary '}
+                        onClick={
+                            saveInputsModal
+                        }
                     >Сохранить
                     </button>
+
                 </div>
             </div>
         </div>

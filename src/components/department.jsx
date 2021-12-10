@@ -38,8 +38,17 @@ const Departments = () => {
     const [className, setClassName] = React.useState({
         name: 'modalWindow',
         title: 'Добавление отдела',
-        btnAddHidden: 'visible',
-        btnSaveHidden: 'visible'
+        btnAddHidden: 'visibleButton',
+        btnSaveHidden: 'visibleButton',
+        item: {
+            name: '',
+            level: '',
+            bossName: '',
+            bossSurName: '',
+            bossMiddleName: '',
+            cabinetNumber: '',
+            isEdit: false
+        }
     })
 
     //закрыть модалку
@@ -53,22 +62,32 @@ const Departments = () => {
         setClassName({
             name: 'modalWindow',
             title: 'Добавление отдела',
-            btnAddHidden: 'visible',
-            btnSaveHidden: 'hiddenButton'
+            btnAddHidden: 'visibleButton',
+            btnSaveHidden: 'hiddenButton',
+            item: {},
+            isEdit: false
         })
     }
-    //открыть модалку изменения
-    const openModalChange = () => {
-        setHidden(false)
-        setClassName({
-            name: 'modalWindowChange',
-            title: 'Изменить данные',
-            btnAddHidden: 'hiddenButton',
-            btnSaveHidden: 'visible'
+
+    //функционал кнопки сохранить
+    const saveModal = (inputs) => {
+      let newDepart =  depart.map(function (item) {
+          console.log(item)
+        if (inputs.id === item.id ){
+           return inputs
+        }
+        else return item
         })
 
+          setDepart(
+              newDepart
+          )
+        closeModal()
     }
 
+    const deleteModal = ()=> {
+
+    }
 
     //добавить новый отдел
     const addModal = (inputs) => {
@@ -80,6 +99,19 @@ const Departments = () => {
     }
 
     let res = depart.map(function (item) {
+        //открыть модалку изменения
+        const openModalChange = () => {
+            setHidden(false)
+            setClassName({
+                name: 'modalWindowChange',
+                title: 'Изменить данные',
+                btnAddHidden: 'hiddenButton',
+                btnSaveHidden: 'visibleButton',
+                item: item,
+                isEdit: true
+            })
+        }
+
         return (
             //тело таблицы
             <tr key={item.id}>
@@ -88,6 +120,8 @@ const Departments = () => {
                 <td>{item.level}</td>
                 <td>{item.bossSurName} {item.bossName} {item.bossMiddleName}</td>
                 <td>{item.cabinetNumber}</td>
+                <td> <button hidden={!hidden} type="button" className="btn btn-info" onClick={openModalChange}>Изменить</button></td>
+                <td> <button hidden={!hidden} type="button" className="btn btn-warning" onClick={deleteModal}>Удалить</button></td>
             </tr>)
     })
 
@@ -104,6 +138,8 @@ const Departments = () => {
                 <th scope="col">Этаж</th>
                 <th scope="col">Начальник</th>
                 <th scope="col">Кабинет</th>
+                <th scope="col">Изменить</th>
+                <th scope="col">Удалить</th>
             </tr>
 
             {/*Содержимое таблицы*/}
@@ -114,13 +150,14 @@ const Departments = () => {
         </table>
         <div>
             <button hidden={!hidden} className="btn btn-success" onClick={openModalAdd}>Добавить новый отдел</button>
-            <button hidden={!hidden} type="button" className="btn btn-info" onClick={openModalChange}>Изменить</button>
+
         </div>
         <Modal
             hidden={hidden}
             addModal={addModal}
             closeModal={closeModal}
             className={className}
+            saveModal = {saveModal}
         />
     </div>
 
