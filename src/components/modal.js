@@ -39,11 +39,10 @@ export default function Modal({hidden, addModal, closeModal, className, saveModa
         setInputs(initState)
     }
 
-
+    //Передача инпутов в кнопку сохранить
     const saveInputsModal = () => {
         saveModal(inputs)
     }
-
 
 
     return (

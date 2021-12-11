@@ -7,8 +7,8 @@ import {Archive} from "./pages/archive";
 import {Department} from "./pages/department";
 import {Devices} from "./pages/devices";
 import {Registered} from "./pages/registered";
-import {Worker} from "./pages/worker";
-
+import {Workers} from "./pages/workers";
+import {WorkerID} from "./pages/WorkerID";
 
 function App() {
     return (
@@ -22,7 +22,8 @@ function App() {
                             <Route path="/department" component={Department}/>
                             <Route path="/devices" component={Devices}/>
                             <Route path="/registered" component={Registered}/>
-                            <Route path="/worker" component={Worker}/>
+                            <Route path="/workers" component={Workers}/>
+                            <Route path="/worker/id" component={WorkerID}/>
                         </Switch>
                     </div>
                 </BrowserRouter>

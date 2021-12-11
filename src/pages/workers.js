@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Worker = () => {
+export const Workers = () => {
     return (
         <div className="jumbotron">
             <div className="container">

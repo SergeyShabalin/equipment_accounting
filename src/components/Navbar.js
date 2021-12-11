@@ -18,7 +18,7 @@ export const Navbar = () => (
             </li>
 
             <li className="nav-item">
-                <NavLink to="/worker" className="nav-link">Ответственные</NavLink>
+                <NavLink to="/workers" className="nav-link">Ответственные</NavLink>
             </li>
 
             <li className="nav-item">

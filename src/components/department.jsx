@@ -1,7 +1,14 @@
 import React from 'react'
+
 import '../styles/modalWindow.scss'
 import '../components/modalWindow'
+
+
 import Modal from "../components/modal"
+import {NavLink} from "react-router-dom";
+
+import {Worker} from "./worker";
+
 
 
 const Departments = () => {
@@ -9,7 +16,7 @@ const Departments = () => {
     const [depart, setDepart] = React.useState(
         [{
             id: 1,
-            name: 'отдел информационного обеспечения',
+            name: 'Отдел информационного обеспечения',
             level: '4',
             bossName: 'Василий',
             bossSurName: 'Ковалёв',
@@ -19,7 +26,7 @@ const Departments = () => {
         },
             {
                 id: 2,
-                name: 'отдел хозяйственного обеспечения',
+                name: 'Отдел хозяйственного обеспечения',
                 level: '3',
                 bossName: 'Андрей',
                 bossSurName: 'Кузнецов',
@@ -64,7 +71,7 @@ const Departments = () => {
             title: 'Добавление отдела',
             btnAddHidden: 'visibleButton',
             btnSaveHidden: 'hiddenButton',
-            item: {},
+           // item: {},
             isEdit: false
         })
     }
@@ -72,32 +79,39 @@ const Departments = () => {
     //функционал кнопки сохранить
     const saveModal = (inputs) => {
       let newDepart =  depart.map(function (item) {
-          console.log(item)
         if (inputs.id === item.id ){
            return inputs
         }
         else return item
         })
-
           setDepart(
               newDepart
           )
         closeModal()
     }
 
+
+    //Передать информацию в worker
+    const transferInfo = ()=> {
+
+    }
+
+
+    //функционал кнопки удалить
     const deleteModal = ()=> {
 
     }
 
-    //добавить новый отдел
+    //функционал кнопки добавить новый отдел
     const addModal = (inputs) => {
-        const idNumber = {...inputs, id: depart.length + 2}
+        const idNumber = {...inputs, id: depart.length + 1}
 
         setHidden(true)
         setDepart([...depart, idNumber])
 
     }
 
+    //map массива depart
     let res = depart.map(function (item) {
         //открыть модалку изменения
         const openModalChange = () => {
@@ -114,21 +128,34 @@ const Departments = () => {
 
         return (
             //тело таблицы
-            <tr key={item.id}>
+            <tr align='center'
+                key={item.id}>
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
                 <td>{item.level}</td>
-                <td>{item.bossSurName} {item.bossName} {item.bossMiddleName}</td>
+                <td><NavLink depart = {depart}
+                             onClick = {transferInfo}
+                             to="/worker/id"
+                             className="nav-link">
+                    {item.bossSurName} {item.bossName} {item.bossMiddleName}</NavLink></td>
                 <td>{item.cabinetNumber}</td>
-                <td> <button hidden={!hidden} type="button" className="btn btn-info" onClick={openModalChange}>Изменить</button></td>
-                <td> <button hidden={!hidden} type="button" className="btn btn-warning" onClick={deleteModal}>Удалить</button></td>
-            </tr>)
+                <td> <button hidden={!hidden} type="button" className="btn btn-outline-warning" onClick={openModalChange}>Изменить</button></td>
+                <td> <button hidden={!hidden} type="button" className="btn btn-outline-danger" onClick={deleteModal}>Удалить</button></td>
+
+            </tr>
+                    )
     })
 
     //Заголовок таблицы
-    return <div>
+    return  (
+    <div>
+        <div className="jumbotron">
+            <div className="container">
+                <h1 className="display-5">Отделы</h1>
+                </div>
+        </div>
 
-        Отделы
+
         <table className="table table-hover">
             <thead
                 align='center' className="table-primary">
@@ -138,8 +165,8 @@ const Departments = () => {
                 <th scope="col">Этаж</th>
                 <th scope="col">Начальник</th>
                 <th scope="col">Кабинет</th>
-                <th scope="col">Изменить</th>
-                <th scope="col">Удалить</th>
+                <th colspan="2" scope="col">Действие</th>
+
             </tr>
 
             {/*Содержимое таблицы*/}
@@ -159,7 +186,9 @@ const Departments = () => {
             className={className}
             saveModal = {saveModal}
         />
+
     </div>
+    )
 
 
 }
