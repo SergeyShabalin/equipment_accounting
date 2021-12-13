@@ -1,14 +1,13 @@
 import React from 'react'
 
 import '../styles/modalWindow.scss'
+import '../styles/departmentWindow.css'
+import {IoIosBuild, IoMdClose} from 'react-icons/io'
+
 import '../components/modalWindow'
-
-
 import Modal from "../components/modal"
+
 import {NavLink} from "react-router-dom";
-
-import {Worker} from "./worker";
-
 
 
 const Departments = () => {
@@ -71,44 +70,49 @@ const Departments = () => {
             title: 'Добавление отдела',
             btnAddHidden: 'visibleButton',
             btnSaveHidden: 'hiddenButton',
-           // item: {},
+            // item: {},
             isEdit: false
         })
     }
 
     //функционал кнопки сохранить
     const saveModal = (inputs) => {
-      let newDepart =  depart.map(function (item) {
-        if (inputs.id === item.id ){
-           return inputs
-        }
-        else return item
+        let newDepart = depart.map(function (item) {
+            if (inputs.id === item.id) {
+                return inputs
+            } else return item
         })
-          setDepart(
-              newDepart
-          )
+        setDepart(
+            newDepart
+        )
         closeModal()
     }
 
 
     //Передать информацию в worker
-    const transferInfo = ()=> {
+    const transferInfo = () => {
 
     }
 
 
     //функционал кнопки удалить
-    const deleteModal = ()=> {
+    const deleteModal = (id) => {
+        const confirm = window.confirm('строка будет удалена. Продолжить?')
+        if (confirm) {
 
+            const del = depart.filter(function (item) {
+                    return id!==item.id
+            })
+            setDepart(del)
+        }
     }
+
 
     //функционал кнопки добавить новый отдел
     const addModal = (inputs) => {
         const idNumber = {...inputs, id: depart.length + 1}
-
         setHidden(true)
         setDepart([...depart, idNumber])
-
     }
 
     //map массива depart
@@ -133,64 +137,76 @@ const Departments = () => {
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
                 <td>{item.level}</td>
-                <td><NavLink depart = {depart}
-                             onClick = {transferInfo}
+                <td><NavLink depart={depart}
+                             onClick={transferInfo}
                              to="/worker/id"
                              className="nav-link">
                     {item.bossSurName} {item.bossName} {item.bossMiddleName}</NavLink></td>
                 <td>{item.cabinetNumber}</td>
-                <td> <button hidden={!hidden} type="button" className="btn btn-outline-warning" onClick={openModalChange}>Изменить</button></td>
-                <td> <button hidden={!hidden} type="button" className="btn btn-outline-danger" onClick={deleteModal}>Удалить</button></td>
+
+                {/*редактировать*/}
+                <td>
+                    <IoIosBuild className='iconsChange'
+                                hidden={!hidden}
+                                type="button"
+                                onClick={openModalChange}/>
+                </td>
+
+                {/*удалить*/}
+                <td>
+                    <IoMdClose className='iconsDelete'
+                               hidden={!hidden}
+                               type="button"
+                               onClick={() => deleteModal(item.id)}/>
+                </td>
 
             </tr>
-                    )
+        )
     })
 
     //Заголовок таблицы
-    return  (
-    <div>
-        <div className="jumbotron">
-            <div className="container">
-                <h1 className="display-5">Отделы</h1>
-                </div>
-        </div>
-
-
-        <table className="table table-hover">
-            <thead
-                align='center' className="table-primary">
-            <tr>
-                <th scope="col">№</th>
-                <th scope="col">Отдел</th>
-                <th scope="col">Этаж</th>
-                <th scope="col">Начальник</th>
-                <th scope="col">Кабинет</th>
-                <th colspan="2" scope="col">Действие</th>
-
-            </tr>
-
-            {/*Содержимое таблицы*/}
-            </thead>
-            <tbody>
-            {res}
-            </tbody>
-        </table>
+    return (
         <div>
-            <button hidden={!hidden} className="btn btn-success" onClick={openModalAdd}>Добавить новый отдел</button>
+            <div className="jumbotron">
+                <div className="container">
+                    <h1 className="display-5">Отделы</h1>
+                </div>
+            </div>
 
+
+            <table className="table table-hover ">
+                <thead
+                    align='center' className="table-primary ">
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Отдел</th>
+                    <th scope="col">Этаж</th>
+                    <th scope="col">Начальник</th>
+                    <th scope="col">Кабинет</th>
+                    <th colspan="2" scope="col">Действие</th>
+
+                </tr>
+
+                {/*Содержимое таблицы*/}
+                </thead>
+                <tbody>
+                {res}
+                </tbody>
+            </table>
+            <div>
+                <button hidden={!hidden} className="btn btn-success " onClick={openModalAdd}>Добавить новый отдел
+                </button>
+
+            </div>
+            <Modal
+                hidden={hidden}
+                addModal={addModal}
+                closeModal={closeModal}
+                className={className}
+                saveModal={saveModal}
+            />
         </div>
-        <Modal
-            hidden={hidden}
-            addModal={addModal}
-            closeModal={closeModal}
-            className={className}
-            saveModal = {saveModal}
-        />
-
-    </div>
     )
-
-
 }
 
 export default Departments

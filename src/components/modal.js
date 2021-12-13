@@ -1,8 +1,13 @@
 import React from 'react';
 import {Input} from "./input";
+import {connect} from "react-redux";
 
 
 export default function Modal({hidden, addModal, closeModal, className, saveModal}) {
+
+
+
+
     const initState = {
         name: '',
         level: '',
@@ -14,11 +19,10 @@ export default function Modal({hidden, addModal, closeModal, className, saveModa
     const [inputs, setInputs] = React.useState(initState)
 
     React.useEffect(() => {
-        if (className.isEdit === true){
+        if (className.isEdit === true) {
             setInputs(className.item)
         }
     }, [className.item])
-
 
 
 //занести в стейт значения из инпутов
@@ -49,9 +53,9 @@ export default function Modal({hidden, addModal, closeModal, className, saveModa
         <div>
             {/*Модалка*/}
             <div
-                 hidden={hidden}
-                 onClick={cancelModal}
-                 className='modalOpacity'
+                hidden={hidden}
+                onClick={cancelModal}
+                className='modalOpacity'
             >
             </div>
 
@@ -135,3 +139,21 @@ export default function Modal({hidden, addModal, closeModal, className, saveModa
     );
 }
 
+// function mapStateToProps(state) {
+//     return {
+//         name: state.modal.name,
+//         level: state.modal.level,
+//         bossName: state.modal.bossName,
+//         bossSurName: state.modal.bossSurName,
+//         bossMiddleName: state.modal.bossMiddleName,
+//         cabinetNumber: state.modal.cabinetNumber
+//     }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//     return {
+//       fetchModal: ()=> dispatch(fetchModal())
+//     }
+// }
+
+ // connect(mapStateToProps, mapDispatchToProps)(Modal)

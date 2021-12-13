@@ -24,6 +24,7 @@ function App() {
                             <Route path="/registered" component={Registered}/>
                             <Route path="/workers" component={Workers}/>
                             <Route path="/worker/id" component={WorkerID}/>
+
                         </Switch>
                     </div>
                 </BrowserRouter>
