@@ -147,7 +147,6 @@ const Departments = () => {
                 {/*редактировать*/}
                 <td>
                     <IoIosBuild className='iconsChange'
-                                hidden={!hidden}
                                 type="button"
                                 onClick={openModalChange}/>
                 </td>
@@ -155,7 +154,6 @@ const Departments = () => {
                 {/*удалить*/}
                 <td>
                     <IoMdClose className='iconsDelete'
-                               hidden={!hidden}
                                type="button"
                                onClick={() => deleteModal(item.id)}/>
                 </td>
@@ -194,7 +192,7 @@ const Departments = () => {
                 </tbody>
             </table>
             <div>
-                <button hidden={!hidden} className="btn btn-success " onClick={openModalAdd}>Добавить новый отдел
+                <button  className="btn btn-success " onClick={openModalAdd}>Добавить новый отдел
                 </button>
 
             </div>

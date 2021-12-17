@@ -28,6 +28,7 @@ export const Navbar = () => (
             <li className="nav-item">
                 <NavLink to="/archive" className="nav-link">Списано</NavLink>
             </li>
+
         </ul>
 
     </nav>
