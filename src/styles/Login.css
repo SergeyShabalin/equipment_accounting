@@ -1,0 +1,37 @@
+.backLogin{
+    background: radial-gradient(  #995d00, #000000);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login {
+    background: rgba(213, 213, 213, 0.9);
+    width: 350px;
+    height: 300px;
+    padding: 20px;
+    box-shadow: 2px 2px 22px 6px rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+}
+
+.input{
+    box-shadow: 3px 3px 7px 3px rgba(153, 151, 151, 0.6);
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    margin: 10px 0 5px 0;
+}
+
+.button{
+    text-decoration: none;
+}
+
+.error{
+    height:  20px;
+    color: #995d00;
+    font-weight: bold;
+}

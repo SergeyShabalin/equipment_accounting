@@ -1,0 +1,56 @@
+
+.modalWindow {
+  background: rgba(8, 210, 210, 0.88);
+  position: absolute;
+  right: calc(50% - 600px / 2);
+  width: 600px;
+  top: calc(50% - 560px / 2);
+  height: 560px;
+  padding: 20px;
+  border-radius: 40px;
+
+}
+
+.modalWindowChange {
+  background: rgba(154, 234, 4, 0.85);
+  position: absolute;
+  right: calc(50% - 600px / 2);
+  width: 600px;
+  top: calc(50% - 560px / 2);
+  height: 560px;
+  padding: 20px;
+  border-radius: 40px;
+}
+
+.modalButton {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hiddenButton {
+  display: none
+}
+
+.visibleButton {
+  display: block
+
+}
+
+.modalTitle {
+
+  display: flex;
+  justify-content: center;
+color: rgba(0, 0, 0, 0.88);
+}
+
+
+.modalOpacity {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
