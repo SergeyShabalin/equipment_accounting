@@ -20,6 +20,10 @@
     box-shadow: 3px 3px 7px 3px rgba(153, 151, 151, 0.6);
 }
 
+.selectShadow{
+    box-shadow: 3px 3px 7px 3px rgba(153, 151, 151, 0.6);
+}
+
 .buttons{
     width: 100%;
     display: flex;

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Worker} from "../components/worker";
+import {Worker} from "../components/workers/Worker";
 
 export const WorkerID = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input} from "../components/input";
+import {Input} from "../components/elements/Input";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logins} from "../store/actions/Auth";
@@ -24,7 +24,6 @@ export const Login = () => {
         setLogin({
             ...login, [target.name]: target.value,
         })
-
     }
 
 

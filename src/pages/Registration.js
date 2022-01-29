@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input} from "../components/input";
+import {Input} from "../components/elements/Input";
 import {useDispatch} from "react-redux";
 import {registrations} from "../store/actions/Auth";
 import data from "bootstrap/js/src/dom/data";

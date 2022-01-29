@@ -2,7 +2,7 @@ import React from 'react'
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {logout} from "../store/actions/Auth";
-import Drawer from "./Drawer";
+
 
 
 export const Navbar = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Departments from "../components/department";
+import Departments from "../components/department/Department";
 
 
 export const Department = () => {
@@ -8,11 +8,8 @@ export const Department = () => {
             <div className="jumbotron">
                 <div className="container">
                 </div>
-
             </div>
-            <h2>
                 {<Departments/>}
-            </h2>
         </div>
     )
 }

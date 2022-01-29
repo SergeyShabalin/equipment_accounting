@@ -1,7 +1,6 @@
 import React from 'react';
-import {Input} from "./input";
-import {connect} from "react-redux";
-import $api from "../API";
+import {Input} from "../elements/Input";
+import $api from "../../API";
 
 
 export default function Modal({hidden, addModal, closeModal, configModal, saveModal}) {
@@ -10,10 +9,8 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
     const initState = {
         name: '',
         level: '',
-        bossName: '',
-        bossSurName: '',
-        bossMiddleName: '',
-        cabinetNumber: '',
+        roomNumber: '',
+        boss: ''
     }
     const [inputs, setInputs] = React.useState(initState)
 
@@ -21,6 +18,8 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
         if (configModal.isEdit === true) {
             setInputs(configModal.item)
         }
+
+
     }, [configModal.item])
 
 
@@ -40,20 +39,15 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
     const addClearModal = () => {
 
         const dataAdd = {
-            "name": "fkfkfkkff",
-            "roomNumber": "231",
-            "level": "4",
-            "boss": "61b8edcb693c2f2ccb96f637",
+            ...inputs,
             "devices": [],
             "users": []
         }
 
-        $api.post('http://localhost:1000/api/department', {
+        $api.post('http://localhost:1000/api/department',
             dataAdd
-        }).then(() => {
-
+        ).then(() => {
         })
-
         addModal(inputs)
         setInputs(initState)
     }
@@ -67,26 +61,26 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
     const [boss, setBoss] = React.useState([])
 
 
-
-
     React.useEffect(() => {
         $api.get('http://localhost:1000/api/users').then(({data}) => {
-           let bossMap = data.map(function (boss) {
+            let bossMap = data.map(function (boss) {
                 return (
-                     <option value={boss.id}
-                            key={boss.id}>
-                         {boss.surname} {boss.name} {boss.lastname}
+                    <option value={boss._id}
+                            key={boss._id}>
+                        {boss.surname} {boss.name} {boss.lastname}
                     </option>
-
                 )
             })
             setBoss(bossMap)
-        } )
+        })
     }, [])
 
 
-
     function selectHandler(event) {
+        console.log(event.target.value)
+        setInputs({
+            ...inputs, boss: event.target.value,
+        })
     }
 
 
@@ -103,9 +97,9 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
             <div hidden={hidden}
                  className={configModal.name}
             >
-                <h2 className='modalTitle'>{configModal.title}</h2>
+                <h2 className='modalTitle label'>{configModal.title}</h2>
                 {/*инпуты */}
-                <h3>Отдел</h3>
+                <h3 className='label'>Отдел</h3>
                 <Input type="text"
                        label="Отдел"
                        value={inputs.name}
@@ -122,38 +116,18 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
 
                 <Input type="text"
                        label="Кабинет"
-                       value={inputs.cabinetNumber}
-                       name='cabinetNumber'
+                       value={inputs.roomNumber}
+                       name='roomNumber'
                        onChange={inputHandler}
                 />
                 <hr/>
 
-                <h3>Начальник</h3>
-                <select onChange={selectHandler}>
+                <h3 className='label'>Начальник</h3>
+                <select defaultValue={'0'}  className="form-select selectShadow"
+                         onChange={selectHandler}>
                     {boss}
                 </select>
 
-
-                {/*<Input type="text"*/}
-                {/*       label="Фамилия"*/}
-                {/*       value={inputs.bossSurName}*/}
-                {/*       name='bossSurName'*/}
-                {/*       onChange={inputHandler}*/}
-                {/*/>*/}
-
-                {/*<Input type="text"*/}
-                {/*       label="Имя"*/}
-                {/*       value={inputs.bossName}*/}
-                {/*       name='bossName'*/}
-                {/*       onChange={inputHandler}*/}
-                {/*/>*/}
-
-                {/*<Input type="text"*/}
-                {/*       label="Отчество"*/}
-                {/*       value={inputs.bossMiddleName}*/}
-                {/*       name='bossMiddleName'*/}
-                {/*       onChange={inputHandler}*/}
-                {/*/>*/}
 
                 <div className='modalButton'>
                     <button type="button"
@@ -186,21 +160,3 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
     );
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         name: state.modal.name,
-//         level: state.modal.level,
-//         bossName: state.modal.bossName,
-//         bossSurName: state.modal.bossSurName,
-//         bossMiddleName: state.modal.bossMiddleName,
-//         cabinetNumber: state.modal.cabinetNumber
-//     }
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//     return {
-//       fetchModal: ()=> dispatch(fetchModal())
-//     }
-// }
-
-// connect(mapStateToProps, mapDispatchToProps)(Modal)

@@ -1,6 +1,6 @@
 import React from 'react'
 import {useLocation} from 'react-router-dom'
-import $api from "../API/index";
+import $api from "../../API";
 
 export const Worker = () => {
 

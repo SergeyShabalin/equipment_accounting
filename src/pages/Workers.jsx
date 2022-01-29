@@ -13,7 +13,6 @@ import {NavLink} from "react-router-dom";
 // })
 //     }, [])
 
-
     function addDepartment(){
         const dataAdd = {
             "name": "fkfkfkkff",
@@ -32,11 +31,6 @@ import {NavLink} from "react-router-dom";
         )
         })
      }
-
-
-
-
-
 
     return (
         <div className="jumbotron">
@@ -57,8 +51,6 @@ import {NavLink} from "react-router-dom";
             </div>
         </div>
     )
-
-
 }
 
 export default Workers

@@ -1,14 +1,14 @@
 import React from 'react'
 
-import '../styles/modalWindow.scss'
-import '../styles/departmentWindow.css'
+import '../../styles/modalWindow.scss'
+import '../../styles/departmentWindow.css'
 import {IoIosBuild, IoMdClose} from 'react-icons/io'
 
-import '../components/modalWindow'
-import Modal from "../components/modal"
+
+import Modal from "./Modal"
 
 import {NavLink} from "react-router-dom";
-import $api from "../API";
+import $api from "../../API";
 
 
 const Departments = () => {
@@ -137,12 +137,12 @@ const Departments = () => {
 
 
         return (
-            //тело таблицы
-            <tr align='center'
+
+            <tr
                 key={dep._id}>
-                <th scope="row">{index+1}</th>
+                <th>{index+1}</th>
                 <td>{dep.name}</td>
-                <td>{dep.level}</td>
+
                 {dep.boss ?
                     <td><NavLink depart={depart}
                                  onClick={transferInfo}
@@ -150,10 +150,12 @@ const Departments = () => {
                                  className="nav-link"
                                  >
 
-                        {dep.boss.surname} {dep.boss.name[0]}. {dep.boss.lastname[0]}.
+                        {dep.boss.surname} {dep.boss.name} {dep.boss.lastname}
 
                     </NavLink></td>
-                    : <td>нет ответственного</td>}
+                    : <td>нет ответственного</td>
+                }
+                <td>{dep.level}</td>
                 <td>{dep.roomNumber}</td>
 
 
@@ -172,12 +174,13 @@ const Departments = () => {
                 </td>
 
             </tr>
+
         )
     })
 
     //Заголовок таблицы
     return (
-        <div>
+        <>
             <div className="jumbotron">
                 <div className="container">
                     <h1 className="display-5">Отделы</h1>
@@ -187,19 +190,18 @@ const Departments = () => {
 
             <table className="table table-hover ">
                 <thead
-                    align='center' className="table-primary ">
+                    className="table-primary ">
                 <tr>
-                    <th scope="col">№</th>
-                    <th scope="col">Отдел</th>
-                    <th scope="col">Этаж</th>
-                    <th scope="col">Начальник</th>
-                    <th scope="col">Кабинет</th>
-                    <th colspan="2" scope="col">Действие</th>
-
+                    <th>№</th>
+                    <th>Отдел</th>
+                    <th>Начальник</th>
+                    <th>Этаж</th>
+                    <th>Кабинет</th>
+                    <th colSpan="2" scope="col">Действие</th>
                 </tr>
+                </thead>
 
                 {/*Содержимое таблицы*/}
-                </thead>
                 <tbody>
                 {res}
                 </tbody>
@@ -215,7 +217,7 @@ const Departments = () => {
                 configModal={configModal}
                 saveModal={saveModal}
             />
-        </div>
+        </>
     )
 }
 

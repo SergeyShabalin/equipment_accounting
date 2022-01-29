@@ -1,30 +1,45 @@
 
 .modalWindow {
-  background: rgba(8, 210, 210, 0.88);
+  background: radial-gradient(  rgba(101, 97, 248, 0.78), rgba(0, 0, 0, 0.74));
   position: absolute;
   right: calc(50% - 600px / 2);
   width: 600px;
-  top: calc(50% - 560px / 2);
-  height: 560px;
+  top: calc(50% - 460px / 2);
+  height: 460px;
   padding: 20px;
   border-radius: 40px;
-
 }
 
 .modalWindowChange {
-  background: rgba(154, 234, 4, 0.85);
+  background: radial-gradient(  rgba(0, 0, 0, 0.89), rgba(107, 20, 253, 0.8));
   position: absolute;
   right: calc(50% - 600px / 2);
   width: 600px;
-  top: calc(50% - 560px / 2);
-  height: 560px;
+  top: calc(50% - 460px / 2);
+  height: 460px;
   padding: 20px;
   border-radius: 40px;
 }
 
+
+.modalDevice {
+
+  background: radial-gradient(  rgba(0, 255, 4, 0.95), rgba(0, 0, 0, 0.74));
+    position: absolute;
+    right: calc(50% - 600px / 2);
+    width: 600px;
+    top: calc(50% - 460px / 2);
+    height: 460px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 40px;
+
+}
 .modalButton {
   display: flex;
   justify-content: space-around;
+  padding-top: 40px;
 }
 
 .hiddenButton {
@@ -51,6 +66,10 @@ color: rgba(0, 0, 0, 0.88);
   right: 0;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.label{
+  color:white;
 }
 
 
