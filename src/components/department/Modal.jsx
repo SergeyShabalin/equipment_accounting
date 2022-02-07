@@ -13,14 +13,17 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
         boss: ''
     }
     const [inputs, setInputs] = React.useState(initState)
+    const [bosses, setBosses] = React.useState([])
 
     React.useEffect(() => {
         if (configModal.isEdit === true) {
             setInputs(configModal.item)
         }
-
-
     }, [configModal.item])
+
+    React.useEffect(() => {
+        getBosses()
+    }, [])
 
 
 //занести в стейт значения из инпутов
@@ -52,29 +55,24 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
         setInputs(initState)
     }
 
-
     //Передача инпутов в кнопку сохранить
     const saveInputsModal = () => {
         saveModal(inputs)
     }
 
-    const [boss, setBoss] = React.useState([])
+    async function getBosses() {
+        let resp = await $api.get('http://localhost:1000/api/users')
+        setBosses(resp.data)
+    }
 
-
-    React.useEffect(() => {
-        $api.get('http://localhost:1000/api/users').then(({data}) => {
-            let bossMap = data.map(function (boss) {
-                return (
-                    <option value={boss._id}
-                            key={boss._id}>
-                        {boss.surname} {boss.name} {boss.lastname}
-                    </option>
-                )
-            })
-            setBoss(bossMap)
-        })
-    }, [])
-
+    let bossMap = bosses.map(function (boss) {
+        return (
+            <option value={boss._id}
+                    key={boss._id}>
+                {boss.surname} {boss.name} {boss.lastname}
+            </option>
+        )
+    })
 
     function selectHandler(event) {
         console.log(event.target.value)
@@ -82,7 +80,6 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
             ...inputs, boss: event.target.value,
         })
     }
-
 
     return (
         <div>
@@ -123,9 +120,9 @@ export default function Modal({hidden, addModal, closeModal, configModal, saveMo
                 <hr/>
 
                 <h3 className='label'>Начальник</h3>
-                <select defaultValue={'0'}  className="form-select selectShadow"
-                         onChange={selectHandler}>
-                    {boss}
+                <select defaultValue={'0'} className="form-select selectShadow"
+                        onChange={selectHandler}>
+                    {bossMap}
                 </select>
 
 

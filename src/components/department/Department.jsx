@@ -23,8 +23,6 @@ const Departments = () => {
         })
     }, [])
 
-
-
     //стэйт модалки
     const [hidden, setHidden] = React.useState(true)
 

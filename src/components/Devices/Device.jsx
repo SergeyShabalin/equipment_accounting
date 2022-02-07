@@ -5,12 +5,14 @@ import {IoIosBuild, IoMdClose} from "react-icons/io";
 import ModalDevice from '../Devices/ModalDevice'
 import '../../styles/modalWindow.scss'
 import '../../styles/Device.css'
+import {Input} from '../elements/Input'
 
 
 function Device() {
 
     const [devices, setDevices] = React.useState([])
     const [hiddenModal, setHiddenModal] = React.useState(true)
+    const [filterDevice, setFilterDevice] = React.useState('')
 
     React.useEffect(() => {
          getDevices()
@@ -25,6 +27,22 @@ function Device() {
         const idNumber = {...input, id: devices.length + 1}
         setHiddenModal(true)
         setDevices([...devices, idNumber])
+    }
+
+    function searchInputHandler({target}) {
+        setFilterDevice(target.value)
+        console.log(filterDevice)
+    }
+
+    function searchDevices() {
+        let searchResult = devices.filter(function (device) {
+            return (device.seria === filterDevice ||
+                device.name === filterDevice ||
+            device.inventoryNumber === filterDevice ||
+            device.condition === filterDevice)
+
+        }); console.log(searchResult)
+        setDevices(searchResult)
     }
 
     function hiddenAddDevice() {
@@ -49,8 +67,8 @@ function Device() {
         }
     }
 
-    let reverseDevices = devices.reverse() //перевернём массив
-    let devicesInTable = reverseDevices.map(function (item, index) {
+    // let reverseDevices = devices.reverse() //перевернём массив
+    let devicesInTable = devices.map(function (item, index) {
 
             return (
                 <React.Fragment key={item._id}>
@@ -65,7 +83,7 @@ function Device() {
                         <td>
                             <IoIosBuild className='iconsChange'
                                         type="button"
-                                        />
+                            />
                         </td>
 
                         <td>
@@ -82,11 +100,23 @@ function Device() {
 
     return (
         <>
+        <div className='search'>
             <button
-                className="btn btn-success buttonAddDevice"
-                    onClick={hiddenAddDevice}>
-                Добавить оборудование
-            </button>
+            className="btn btn-success buttonAddDevice"
+            onClick={hiddenAddDevice}>
+            Добавить оборудование
+        </button>
+
+            <input className = 'inputSearch'
+                   placeholder = 'Введите данные для поиска'
+                   onChange={searchInputHandler} />
+
+            <input className='searchButton'
+                   type = 'image'
+                   src = "https://www.iconpacks.net/icons/1/free-search-icon-666-thumb.png"
+                   onClick={searchDevices}
+            />
+        </div>
 
             <table className="table">
                 <thead
@@ -112,6 +142,7 @@ function Device() {
                 addDevice={addDevice}
                 hiddenModal={hiddenModal}
                 closeAddDevice={closeAddDevice}
+
             />
         </>
 
